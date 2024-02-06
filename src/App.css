@@ -13,6 +13,16 @@
   }
 }
 
+#title {
+  font-size: 3em;
+}
+
+@media screen and (max-width: 40em) {
+  #title {
+    font-size: 8vw;
+  }
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

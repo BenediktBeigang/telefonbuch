@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,7 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TextField from "@mui/material/TextField";
-import "./PhoneNumberTable.css";
+import styles from "./PhoneNumberTable.module.css";
 
 const data = [
   { name: "John Doe", phone: "123-456-7890" },
@@ -22,18 +22,8 @@ const data = [
 ];
 
 const PhoneNumberTable = () => {
-  // extract data from a json file where one item is formated like this:
-
-  const [data, setData] = useState([]);
 
   const [searchTerm, setSearchTerm] = React.useState("");
-
-  useEffect(() => {
-    fetch("../telefonbuch.json")
-      .then((response) => response.json())
-      .then((jsonData) => setData(jsonData))
-      .catch((error) => console.error("Error:", error));
-  }, []);
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -44,19 +34,19 @@ const PhoneNumberTable = () => {
   );
 
   return (
-    <div id="rootPhoneNumberTable">
+    <div id={styles.rootPhoneNumberTable}>
       <TextField
-        id="searchBar"
+        id={styles.searchBar}
         label="Telefonbuch durchsuchen"
         value={searchTerm}
         onChange={handleChange}
       />
-      <TableContainer component={Paper} id="numberTable">
+      <TableContainer component={Paper} id={styles.numberTable}>
         <Table sx={{ minWidth: 200 }} aria-label="simple table">
           <TableHead>
             <TableRow sx={{ backgroundColor: "#eeeeee" }}>
-              <TableCell sx={{ fontWeight: "bold" }}>Name</TableCell>
-              <TableCell sx={{ fontWeight: "bold" }} align="right">
+              <TableCell className={styles.responsiveTableCell} sx={{ fontWeight: "bold" }}>Name</TableCell>
+              <TableCell className={styles.responsiveTableCell} sx={{ fontWeight: "bold" }} align="right">
                 Phone Number
               </TableCell>
             </TableRow>
@@ -64,10 +54,19 @@ const PhoneNumberTable = () => {
           <TableBody>
             {filteredData.map((row) => (
               <TableRow key={row.name}>
-                <TableCell component="th" scope="row">
+                <TableCell
+                  className={styles.responsiveTableCell}
+                  component="th"
+                  scope="row"
+                >
                   {row.name}
                 </TableCell>
-                <TableCell align="right">{row.phone}</TableCell>
+                <TableCell 
+                  className={styles.responsiveTableCell} 
+                  align="right"
+                >
+                  {row.phone}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -12,7 +12,15 @@
   margin-top: 1em;
 }
 
-#searchBar {
-    min-width: 15em;
-    max-width: 30em;
+.responsiveTableCell {
+  font-size: 0.9em;
+}
+
+@media screen and (max-width: 60em) {
+  #numberTable {
+    width: 80vw;
+  }
+  #searchBar {
+    width: 75vw;
+  }
 }
