@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,20 +10,8 @@ import TextField from "@mui/material/TextField";
 import styles from "./PhoneNumberTable.module.css";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
-// const data = [
-//   { name: "John Doe", phone: "123-456-7890" },
-//   { name: "Jane Smith", phone: "098-765-4321" },
-//   { name: "Bob Johnson", phone: "111-222-3333" },
-//   { name: "Mary Brown", phone: "444-555-6666" },
-//   { name: "James Lee", phone: "777-888-9999" },
-//   { name: "Patricia Wilson", phone: "000-111-2222" },
-//   { name: "Michael Davis", phone: "333-444-5555" },
-//   { name: "Linda Taylor", phone: "666-777-8888" },
-//   { name: "Robert Anderson", phone: "999-000-1111" }
-// ];
-
 const client = new ApolloClient({
-  uri: "http://localhost:4000", // Stelle sicher, dass dies die richtige URL zu deinem Server ist
+  uri: "http://localhost:4000",
   cache: new InMemoryCache(),
 });
 
@@ -36,23 +24,22 @@ const GET_PEOPLE = gql`
   }
 `;
 
-let data = [];
-
-// console.log("Daten werden abgerufen...");
-
-client.query({
-    query: GET_PEOPLE,
-  })
-  .then((result) => {
-    data = result.data.people;
-  })
-  .catch((error) => {
-    console.error("Fehler beim Abrufen der Daten:", error);
-  });
-
 const PhoneNumberTable = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [data, setData] = useState([]);
 
-  const [searchTerm, setSearchTerm] = React.useState("");
+  useEffect(() => {
+    client
+      .query({
+        query: GET_PEOPLE,
+      })
+      .then((result) => {
+        setData(result.data.people);
+      })
+      .catch((error) => {
+        console.error("Fehler beim Abrufen der Daten:", error);
+      });
+  }, []);
 
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
@@ -64,18 +51,29 @@ const PhoneNumberTable = () => {
 
   return (
     <div id={styles.rootPhoneNumberTable}>
-      <TextField
-        id={styles.searchBar}
-        label="Telefonbuch durchsuchen"
-        value={searchTerm}
-        onChange={handleChange}
-      />
+      <div id={styles.searchWrapper}>
+        <TextField
+          id={styles.searchBar}
+          label="Telefonbuch durchsuchen"
+          value={searchTerm}
+          onChange={handleChange}
+        />
+      </div>
       <TableContainer component={Paper} id={styles.numberTable}>
-        <Table sx={{ minWidth: 200 }} aria-label="simple table">
+        <Table aria-label="simple table">
           <TableHead>
-            <TableRow sx={{ backgroundColor: "#eeeeee" }}>
-              <TableCell className={styles.responsiveTableCell} sx={{ fontWeight: "bold" }}>Name</TableCell>
-              <TableCell className={styles.responsiveTableCell} sx={{ fontWeight: "bold" }} align="right">
+            <TableRow sx={{ backgroundColor: "#008585" }}>
+              <TableCell
+                className={styles.tableCell}
+                sx={{ color: "white", fontWeight: "bold" }}
+              >
+                Name
+              </TableCell>
+              <TableCell
+                className={styles.tableCell}
+                sx={{ color: "white", fontWeight: "bold" }}
+                align="right"
+              >
                 Phone Number
               </TableCell>
             </TableRow>
@@ -84,16 +82,15 @@ const PhoneNumberTable = () => {
             {filteredData.map((row) => (
               <TableRow key={row.name}>
                 <TableCell
-                  className={styles.responsiveTableCell}
+                  className={styles.tableCell}
                   component="th"
                   scope="row"
                 >
                   {row.name}
                 </TableCell>
                 <TableCell 
-                  className={styles.responsiveTableCell} 
-                  align="right"
-                >
+                  className={styles.tableCell} 
+                  align="right">
                   {row.phone}
                 </TableCell>
               </TableRow>

@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #fbf2c4;
 }
 
 .App-logo {
@@ -13,13 +14,16 @@
   }
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
 #title {
   font-size: 3em;
 }
 
 @media screen and (max-width: 40em) {
   #title {
-    font-size: 8vw;
+    font-size: 10vw;
+    font-family: "Playfair Display", serif;
   }
 }
 
@@ -32,17 +36,4 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
