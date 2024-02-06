@@ -8,18 +8,47 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TextField from "@mui/material/TextField";
 import styles from "./PhoneNumberTable.module.css";
+import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
-const data = [
-  { name: "John Doe", phone: "123-456-7890" },
-  { name: "Jane Smith", phone: "098-765-4321" },
-  { name: "Bob Johnson", phone: "111-222-3333" },
-  { name: "Mary Brown", phone: "444-555-6666" },
-  { name: "James Lee", phone: "777-888-9999" },
-  { name: "Patricia Wilson", phone: "000-111-2222" },
-  { name: "Michael Davis", phone: "333-444-5555" },
-  { name: "Linda Taylor", phone: "666-777-8888" },
-  { name: "Robert Anderson", phone: "999-000-1111" }
-];
+// const data = [
+//   { name: "John Doe", phone: "123-456-7890" },
+//   { name: "Jane Smith", phone: "098-765-4321" },
+//   { name: "Bob Johnson", phone: "111-222-3333" },
+//   { name: "Mary Brown", phone: "444-555-6666" },
+//   { name: "James Lee", phone: "777-888-9999" },
+//   { name: "Patricia Wilson", phone: "000-111-2222" },
+//   { name: "Michael Davis", phone: "333-444-5555" },
+//   { name: "Linda Taylor", phone: "666-777-8888" },
+//   { name: "Robert Anderson", phone: "999-000-1111" }
+// ];
+
+const client = new ApolloClient({
+  uri: "http://localhost:4000", // Stelle sicher, dass dies die richtige URL zu deinem Server ist
+  cache: new InMemoryCache(),
+});
+
+const GET_PEOPLE = gql`
+  query GetPeople {
+    people {
+      name
+      phone
+    }
+  }
+`;
+
+let data = [];
+
+// console.log("Daten werden abgerufen...");
+
+client.query({
+    query: GET_PEOPLE,
+  })
+  .then((result) => {
+    data = result.data.people;
+  })
+  .catch((error) => {
+    console.error("Fehler beim Abrufen der Daten:", error);
+  });
 
 const PhoneNumberTable = () => {
 
