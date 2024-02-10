@@ -26,7 +26,7 @@ const GET_PEOPLE = gql`
 
 const PhoneNumberTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [data, setData] = useState([]);
+  const [people, setPeople] = useState([{ name: "", phone: ""}]);
 
   useEffect(() => {
     client
@@ -34,7 +34,7 @@ const PhoneNumberTable = () => {
         query: GET_PEOPLE,
       })
       .then((result) => {
-        setData(result.data.people);
+        setPeople(result.data.people);
       })
       .catch((error) => {
         console.error("Fehler beim Abrufen der Daten:", error);
@@ -45,12 +45,14 @@ const PhoneNumberTable = () => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredData = data.filter((item) =>
+  const filteredData = people.filter((item) =>
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    || item.phone.includes(searchTerm)
   );
 
   return (
     <div id={styles.rootPhoneNumberTable}>
+      <h1 id={styles.title}>Telefonbuch</h1>
       <div id={styles.searchWrapper}>
         <TextField
           id={styles.searchBar}
@@ -62,25 +64,25 @@ const PhoneNumberTable = () => {
       <TableContainer component={Paper} id={styles.numberTable}>
         <Table aria-label="simple table">
           <TableHead>
-            <TableRow sx={{ backgroundColor: "#008585" }}>
+            <TableRow sx={{ backgroundColor: "#00858555" }}>
               <TableCell
                 className={styles.tableCell}
-                sx={{ color: "white", fontWeight: "bold" }}
+                sx={{ fontWeight: "bold" }}
               >
                 Name
               </TableCell>
               <TableCell
                 className={styles.tableCell}
-                sx={{ color: "white", fontWeight: "bold" }}
+                sx={{ fontWeight: "bold" }}
                 align="right"
               >
-                Phone Number
+                Telefonnummer
               </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredData.map((row) => (
-              <TableRow key={row.name}>
+            {filteredData.map((row, index) => (
+              <TableRow key={`${row.name}-${index}`}>
                 <TableCell
                   className={styles.tableCell}
                   component="th"
@@ -88,9 +90,7 @@ const PhoneNumberTable = () => {
                 >
                   {row.name}
                 </TableCell>
-                <TableCell 
-                  className={styles.tableCell} 
-                  align="right">
+                <TableCell className={styles.tableCell} align="right">
                   {row.phone}
                 </TableCell>
               </TableRow>

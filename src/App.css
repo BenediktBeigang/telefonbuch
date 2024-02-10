@@ -14,19 +14,6 @@
   }
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
-
-#title {
-  font-size: 3em;
-}
-
-@media screen and (max-width: 40em) {
-  #title {
-    font-size: 10vw;
-    font-family: "Playfair Display", serif;
-  }
-}
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

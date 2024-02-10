@@ -1,20 +1,40 @@
-#rootPhoneNumberTable{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2em;
+#rootPhoneNumberTable {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2em;
+  margin-top: 0;
+}
+
+@import url('https: //fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap');
+#title {
+  font-family: "Playfair Display", serif;
+  font-size: 3em;
+  margin: 0;
+  padding-top: 0;
+  background-color: #fbf2c4;
+  z-index: 5;
+  width: 100%;
+}
+
+@media screen and (max-width: 40em) {
+  #title {
+    font-size: 10vw;
+  }
 }
 
 #searchWrapper {
   position: sticky;
+  position: -webkit-sticky;
   top: 0;
-  padding: 1em;
+  margin: 0;
+  padding: 0.5em;
   width: 100%;
   background-color: #fbf2c4;
-  -webkit-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1); 
 }
 
 #searchBar {
@@ -31,9 +51,14 @@
   margin-top: 1em;
   background-color: #00858544;
   margin-bottom: 1em;
+
+  -webkit-box-shadow: 0px 0px 100px 3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 0px 100px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 100px 3px rgba(0, 0, 0, 0.3);
 }
 
 #numberTable .tableCell {
+  font-family: "Display", serif;
   font-size: 1em;
 }
 
