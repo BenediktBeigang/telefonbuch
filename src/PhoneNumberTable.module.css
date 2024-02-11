@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+
 #rootPhoneNumberTable {
   display: flex;
   flex-direction: column;
@@ -5,17 +7,18 @@
   justify-content: center;
   margin-top: 2em;
   margin-top: 0;
+  background-color: white;
 }
 
-@import url('https: //fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&display=swap');
 #title {
-  font-family: "Playfair Display", serif;
+  font-family: "Source Sans 3", serif;
   font-size: 3em;
   margin: 0;
-  padding-top: 0;
-  background-color: #fbf2c4;
-  z-index: 5;
-  width: 100%;
+  padding-top: 0.3em;
+  color: white;
+  background-color: #15243c;
+  width: 100vw;
+  z-index: 1;
 }
 
 @media screen and (max-width: 40em) {
@@ -28,45 +31,51 @@
   position: sticky;
   position: -webkit-sticky;
   top: 0;
-  margin: 0;
-  padding: 0.5em;
-  width: 100%;
-  background-color: #fbf2c4;
-  -webkit-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1);
-  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.1); 
+  padding-top: 1em;
+  padding-bottom: 1em;
+  width: 100vw;
+  background-color: #15243c;
+  -webkit-box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.2);
 }
 
 #searchBar {
   position: sticky;
   top: 0;
-  width: 20em;
-  background-color: #ffffff66;
-  color: black;
+  margin: 0;
+  width: 38em;
+  color: white;
+}
+
+#numberTableWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 #numberTable {
-  width: 40%;
+  width: 40em;
   border-collapse: collapse;
   margin-top: 1em;
-  background-color: #00858544;
   margin-bottom: 1em;
 
-  -webkit-box-shadow: 0px 0px 100px 3px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0px 0px 100px 3px rgba(0, 0, 0, 0.3);
-  box-shadow: 0px 0px 100px 3px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 0px 0px 40px 3px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 40px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 40px 3px rgba(0, 0, 0, 0.2);
 }
 
 #numberTable .tableCell {
-  font-family: "Display", serif;
-  font-size: 1em;
+  font-family: "Source Sans 3";
+  font-size: 1.2em;
+  background-color: #f9f9f9;
 }
 
 @media screen and (max-width: 60em) {
   #numberTable {
-    width: 80vw;
+    width: 22em;
   }
   #searchBar {
-    width: 75vw;
+    width: 20em;
   }
 }

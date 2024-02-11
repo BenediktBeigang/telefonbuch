@@ -5,11 +5,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #fbf2c4;
+  background-color: white;
   padding: 0;
   overflow-x: hidden;
   width: 100%;
   box-sizing: border-box;
+}
+
+@media screen and (max-width: 40em){
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 code {

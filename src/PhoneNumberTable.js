@@ -34,10 +34,28 @@ const PhoneNumberTable = () => {
         query: GET_PEOPLE,
       })
       .then((result) => {
-        setPeople(result.data.people);
+        const sortedPeople = [...result.data.people].sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
+        setPeople(sortedPeople);
       })
       .catch((error) => {
         console.error("Fehler beim Abrufen der Daten:", error);
+        const dummyData = [
+          { name: "Max Mustermann", phone: "123456789" },
+          { name: "Erika Mustermann", phone: "987654321" },
+          { name: "Hans Müller", phone: "456789123" },
+          { name: "Anna Müller", phone: "321654987" },
+          { name: "Gabi Meier", phone: "789123456" },
+          { name: "Klaus Schmidt", phone: "654321987" },
+          { name: "Petra Schmitz", phone: "147258369" },
+          { name: "Karl Schulz", phone: "369258147" },
+          { name: "Gabi Meier", phone: "789133456" },
+          { name: "Klaus Schmidt", phone: "654361987" },
+          { name: "Petra Schmitz", phone: "147358369" },
+          { name: "Karl Schulz", phone: "369252147" },
+        ];
+        setPeople(dummyData);
       });
   }, []);
 
@@ -59,45 +77,72 @@ const PhoneNumberTable = () => {
           label="Telefonbuch durchsuchen"
           value={searchTerm}
           onChange={handleChange}
+          sx={{
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "white",
+                backgroundColor: "#ffffff33",
+              },
+              "&:hover fieldset": {
+                borderColor: "white",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "white",
+              },
+            },
+            "& .MuiFormLabel-root": {
+              color: "white",
+            },
+            "& .MuiFormLabel-root.Mui-focused": {
+              color: "white",
+            },
+          }}
         />
       </div>
-      <TableContainer component={Paper} id={styles.numberTable}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow sx={{ backgroundColor: "#00858555" }}>
-              <TableCell
-                className={styles.tableCell}
-                sx={{ fontWeight: "bold" }}
-              >
-                Name
-              </TableCell>
-              <TableCell
-                className={styles.tableCell}
-                sx={{ fontWeight: "bold" }}
-                align="right"
-              >
-                Telefonnummer
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filteredData.map((row, index) => (
-              <TableRow key={`${row.name}-${index}`}>
+      <div id={styles.numberTableWrapper}>
+        <TableContainer component={Paper} id={styles.numberTable}>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow sx={{ backgroundColor: "#f9f9f9" }}>
                 <TableCell
                   className={styles.tableCell}
-                  component="th"
-                  scope="row"
+                  sx={{ fontWeight: "bold" }}
                 >
-                  {row.name}
+                  Name
                 </TableCell>
-                <TableCell className={styles.tableCell} align="right">
-                  {row.phone}
+                <TableCell
+                  className={styles.tableCell}
+                  sx={{ fontWeight: "bold" }}
+                  align="right"
+                >
+                  Telefonnummer
                 </TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {filteredData.map((row, index) => (
+                <TableRow key={`${row.name}-${index}`}>
+                  <TableCell
+                    className={styles.tableCell}
+                    component="th"
+                    scope="row"
+                    style={{ backgroundColor: "#f9f9f9" }}
+                  >
+                    {row.name}
+                  </TableCell>
+                  <TableCell
+                    className={styles.tableCell}
+                    align="right"
+                    style={{ backgroundColor: "#f9f9f9" }}
+                  >
+                    {row.phone}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
     </div>
   );
 };
